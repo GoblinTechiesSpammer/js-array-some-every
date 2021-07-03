@@ -6,7 +6,13 @@ Examples:
     hasOddNumber([2,2,2,2,2,4]) // false
 */
 
-function hasOddNumber(arr) {}
+function hasOddNumber(arr) {
+    return arr.some(function(number){
+        if(number % 2 === 1){
+            return true;
+        }
+    });
+}
 
 /*
 Write a function called hasAZero which accepts a number and returns true if that number contains at least one zero. Otherwise, the function should return false
@@ -16,7 +22,14 @@ Examples:
     hasAZero(1212121) // false
 */
 
-function hasAZero(num) {}
+function hasAZero(num) {
+    const digits = num.toString().split('');
+    return digits.some(function(digit){
+        if(digit === '0'){
+            return true;
+        }
+    });
+}
 
 /*
 Write a function called hasOnlyOddNumbers which accepts an array and returns true if every single number in the array is odd. If any of the values in the array are not odd, the function should return false. 
@@ -26,7 +39,11 @@ Examples:
     hasOnlyOddNumbers([1,2,3,5,7]) // false
 */
 
-function hasOnlyOddNumbers(arr) {}
+function hasOnlyOddNumbers(arr) {
+    return arr.every(function(num){
+        return num % 2;
+    });
+}
 
 /*
 Write a function called hasNoDuplicates which accepts an array and returns true if there are no duplicate values (more than one element in the array that has the same value as another). If there are any duplicates, the function should return false.
@@ -36,7 +53,19 @@ Examples:
     hasNoDuplicates([1,2,3]) // true
 */
 
-function hasNoDuplicates(arr) {}
+function hasNoDuplicates(arr) {
+    const isDuplicate = arr.some(duplicate);
+
+    function duplicate(num){
+        for(let i = arr.indexOf(num) + 1; i < arr.length; i++){
+            if(arr[i] === num){
+                return true;
+            }
+        }
+    }
+
+    return !isDuplicate;
+}
 
 /*
 Write a function called hasCertainKey which accepts an array of objects and a key, and returns true if every single object in the array contains that key. Otherwise it should return false.
@@ -53,7 +82,15 @@ Examples:
     hasCertainKey(arr,'isCatOwner') // false
 */
 
-function hasCertainKey(arr, key) {}
+function hasCertainKey(arr, key) {
+    const allHaveKeys = arr.every(hasKey);
+
+    function hasKey(obj){
+        if (obj.hasOwnProperty(key)) return true;
+    }
+
+    return allHaveKeys;
+}
 
 /*
 Write a function called hasCertainValue which accepts an array of objects and a key, and a value, and returns true if every single object in the array contains that value for the specific key. Otherwise it should return false.
@@ -71,4 +108,14 @@ Examples:
     
 */
 
-function hasCertainValue(arr, key, searchValue) {}
+function hasCertainValue(arr, key, searchValue) {
+    const allHaveValue = arr.every(hasValue);
+    
+    function hasValue(obj){
+        if (obj.hasOwnProperty(key) && obj[key] === searchValue){
+            return true;
+        }
+    }
+
+    return allHaveValue;
+}
